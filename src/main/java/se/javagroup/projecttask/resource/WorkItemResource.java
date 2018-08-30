@@ -51,7 +51,7 @@ public final class WorkItemResource {
         service.updateWorkItem(workItemId, workItem, userNumber);
         return Response.noContent().build();
     }
-
+//
     @DELETE
     @Path("{workItemId}")
     public Response deleteWorkItem(@PathParam("workItemId") Long workItemId) {
