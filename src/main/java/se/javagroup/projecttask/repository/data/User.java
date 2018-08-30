@@ -19,7 +19,7 @@ public class User {
     private String username;
     @Column(unique = true, nullable = false)
     private Long userNumber;
-    private boolean status;
+    private Boolean status;
     @ManyToOne
     @JsonBackReference
     private Team team;
@@ -30,7 +30,7 @@ public class User {
     public User() {
     }
 
-    public User(Long id, String firstName, String lastName, String username, Long userNumber, boolean status,
+    public User(Long id, String firstName, String lastName, String username, Long userNumber, Boolean status,
                 Team team) {
         this.id = id;
         this.firstName = firstName;
@@ -42,7 +42,7 @@ public class User {
         this.userNumber = userNumber;
     }
 
-    public User(Long id, String firstName, String lastName, String username, Long userNumber, boolean status) {
+    public User(Long id, String firstName, String lastName, String username, Long userNumber, Boolean status) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -93,7 +93,7 @@ public class User {
         this.userNumber = userNumber;
     }
 
-    public boolean isStatus() {
+    public Boolean isStatus() {
         return status;
     }
 
