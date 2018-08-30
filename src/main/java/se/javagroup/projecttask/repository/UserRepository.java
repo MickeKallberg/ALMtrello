@@ -25,4 +25,5 @@ public interface UserRepository extends JpaRepository<User, Long> {
                               @Param("usernumber") String userNumber);
 
     Optional<User> findByUserNumber(Long userNumber);
+    //List<User> findByUserNumber(Long userNumber);
 }

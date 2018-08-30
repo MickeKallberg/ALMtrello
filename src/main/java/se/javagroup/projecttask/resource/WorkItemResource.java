@@ -12,6 +12,8 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 import java.net.URI;
 
+import static javax.ws.rs.core.Response.Status.NOT_FOUND;
+
 @Path("workitems")
 @Component
 @Consumes(MediaType.APPLICATION_JSON)
@@ -57,6 +59,14 @@ public final class WorkItemResource {
     public Response deleteWorkItem(@PathParam("workItemId") Long workItemId) {
         service.deleteWorkItem(workItemId);
         return Response.noContent().build();
+    }
+
+    @PUT
+    @Path("{id}/helpers/{userId}")
+    public Response addHelpers(@PathParam("id") Long id, @PathParam("userId") Long userId){
+
+        service.addHelperToWorkitem(id, userId);
+        return Response.status(Response.Status.CREATED).build();
     }
 
     private URI locationOf(WorkItem workItem) {

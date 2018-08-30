@@ -2,8 +2,10 @@ package se.javagroup.projecttask.repository.data;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import org.hibernate.annotations.Cascade;
 
 import javax.persistence.*;
+import java.util.*;
 
 @Entity
 public class WorkItem {
@@ -23,6 +25,9 @@ public class WorkItem {
     @JsonManagedReference
     private Issue issue;
 
+    @ManyToMany(fetch = FetchType.EAGER)
+    private List<User> helpers;
+
     protected WorkItem() {
     }
 
@@ -30,6 +35,7 @@ public class WorkItem {
         this.id = id;
         this.description = description;
         this.workItemStatus = workItemStatus;
+        this.helpers = new ArrayList<>();
     }
 
     public WorkItem(Long id, String description, WorkItemStatus workItemStatus, User user) {
@@ -37,6 +43,7 @@ public class WorkItem {
         this.description = description;
         this.workItemStatus = workItemStatus;
         this.user = user;
+        this.helpers = new ArrayList<>();
     }
 
     public Long getId() {
@@ -61,5 +68,13 @@ public class WorkItem {
 
     public Issue getIssue() {
         return issue;
+    }
+
+    public boolean addHelper(User helper){
+        return this.helpers.add(helper);
+    }
+
+    public boolean removeHelper(User helper){
+        return this.helpers.remove(helper);
     }
 }
