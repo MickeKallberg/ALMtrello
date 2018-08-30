@@ -18,6 +18,7 @@ public class WorkItem {
     @ManyToOne()
     @JsonBackReference
     private User user;
+
     @OneToOne(mappedBy = "workItem", fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
     @JsonManagedReference
     private Issue issue;

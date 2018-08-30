@@ -7,6 +7,9 @@ public class WorkItemDto {
     private String workItemStatus;
     private User user;
 
+    public WorkItemDto() {
+    }
+
     public WorkItemDto(String description, String workItemStatus, User user) {
         this.description = description;
         this.workItemStatus = workItemStatus;
