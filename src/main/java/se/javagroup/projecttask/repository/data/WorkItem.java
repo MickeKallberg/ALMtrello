@@ -17,6 +17,7 @@ public class WorkItem {
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private WorkItemStatus workItemStatus;
+
     @ManyToOne()
     @JsonBackReference
     private User user;
@@ -35,7 +36,6 @@ public class WorkItem {
         this.id = id;
         this.description = description;
         this.workItemStatus = workItemStatus;
-        this.helpers = new ArrayList<>();
     }
 
     public WorkItem(Long id, String description, WorkItemStatus workItemStatus, User user) {
@@ -43,7 +43,13 @@ public class WorkItem {
         this.description = description;
         this.workItemStatus = workItemStatus;
         this.user = user;
-        this.helpers = new ArrayList<>();
+    }
+
+    public WorkItem(Long id, String description, WorkItemStatus workItemStatus, List<User> helpers) {
+        this.id = id;
+        this.description = description;
+        this.workItemStatus = workItemStatus;
+        this.helpers = helpers;
     }
 
     public Long getId() {
@@ -70,11 +76,11 @@ public class WorkItem {
         return issue;
     }
 
-    public boolean addHelper(User helper){
-        return this.helpers.add(helper);
+    public List<User> getHelpers() {
+        return helpers;
     }
 
-    public boolean removeHelper(User helper){
-        return this.helpers.remove(helper);
+    public void setHelpers(List<User> helpers) {
+        this.helpers = helpers;
     }
 }

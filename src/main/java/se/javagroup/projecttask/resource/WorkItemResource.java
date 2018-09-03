@@ -53,7 +53,7 @@ public final class WorkItemResource {
         service.updateWorkItem(workItemId, workItem, userNumber);
         return Response.noContent().build();
     }
-//
+
     @DELETE
     @Path("{workItemId}")
     public Response deleteWorkItem(@PathParam("workItemId") Long workItemId) {
@@ -62,11 +62,11 @@ public final class WorkItemResource {
     }
 
     @PUT
-    @Path("{id}/helpers/{userId}")
-    public Response addHelpers(@PathParam("id") Long id, @PathParam("userId") Long userId){
+    @Path("{workItemId}/helpers/{userNumber}")
+    public Response addHelpers(@PathParam("workItemId") Long workItemId, WorkItemDto workItem, @PathParam("userNumber") Long userNumber){
 
-        service.addHelperToWorkitem(id, userId);
-        return Response.status(Response.Status.CREATED).build();
+        service.addHelperToWorkItem(workItemId, workItem, userNumber);
+        return Response.noContent().build();
     }
 
     private URI locationOf(WorkItem workItem) {

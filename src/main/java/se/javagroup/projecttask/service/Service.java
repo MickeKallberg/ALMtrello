@@ -89,7 +89,7 @@ public final class Service {
         }
         User user = userOptional.get();
         for (WorkItem w : user.getWorkitems()) {
-            workItemRepository.save(new WorkItem(w.getId(), w.getDescription(), w.getWorkItemStatus(), null));
+            workItemRepository.save(new WorkItem(w.getId(), w.getDescription(), w.getWorkItemStatus()));
         }
         userRepository.delete(user);
     }
@@ -174,6 +174,32 @@ public final class Service {
         return workItemRepository.save(new WorkItem(workItem.getId(), workItemNew.getDescription(),
                 WorkItemStatus.valueOf(workItemNew.getWorkItemStatus()),
                 workItem.getUser()));
+    }
+
+    public WorkItem addHelperToWorkItem(Long workItemId, WorkItemDto workItemNew, Long userNumber) {
+        WorkItem workItem = validateWorkItem(workItemId);
+        if (userExists(userNumber)) {
+            User user = userRepository.findByUserNumber(userNumber).get();
+            List<User> helper = new ArrayList<>();
+            helper.add(user);
+            workItem.setHelpers(helper);
+            //validateUserStatus(user);
+            //validateWorkItemSize(user);
+            if (workItemNew == null) {
+                return workItemRepository.save(new WorkItem(workItem.getId(), workItem.getDescription(),
+                        workItem.getWorkItemStatus(), workItem.getHelpers()));
+            }
+            validateStatus(workItemNew);
+            return workItemRepository.save(new WorkItem(workItem.getId(), workItemNew.getDescription(),
+                    WorkItemStatus.valueOf(workItemNew.getWorkItemStatus()), workItem.getHelpers()));
+        }
+        if (workItemNew == null) {
+            return workItem;
+        }
+        validateStatus(workItemNew);
+        return workItemRepository.save(new WorkItem(workItem.getId(), workItemNew.getDescription(),
+                WorkItemStatus.valueOf(workItemNew.getWorkItemStatus()),
+                workItem.getHelpers()));
     }
 
     public void deleteWorkItem(Long workItemId) {
@@ -353,7 +379,7 @@ public final class Service {
         }
     }
 
-    public void addHelperToWorkitem(Long workItemId, Long userId){
+    /*public void addHelperToWorkitem(Long workItemId, Long userId){
         Optional<User> userFound = userRepository.findById(userId);
         Optional<WorkItem> workItemFound = workItemRepository.findById(workItemId);
 
@@ -365,5 +391,5 @@ public final class Service {
         } else {
             throw new NotFoundException("didnt find what u were looking for");
         }
-    }
+    }*/
 }
