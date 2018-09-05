@@ -176,7 +176,6 @@ public final class Service {
                 workItem.getUser()));
     }
 
-    //hej
     public WorkItem addHelperToWorkItem(Long workItemId, WorkItemDto workItemNew, Long userNumber) {
         WorkItem workItem = validateWorkItem(workItemId);
         if (userExists(userNumber)) {
@@ -378,18 +377,5 @@ public final class Service {
             throw new BadInputException("Can not add work item to inactive user");
         }
     }
-
-    /*public void addHelperToWorkitem(Long workItemId, Long userId){
-        Optional<User> userFound = userRepository.findById(userId);
-        Optional<WorkItem> workItemFound = workItemRepository.findById(workItemId);
-
-        if(userFound.isPresent() && workItemFound.isPresent()){
-
-            workItemFound.get().addHelper(userFound.get());
-            workItemRepository.save(workItemFound.get());
-
-        } else {
-            throw new NotFoundException("didnt find what u were looking for");
-        }
-    }*/
+    
 }
