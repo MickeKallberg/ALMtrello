@@ -198,8 +198,7 @@ public final class Service {
         }
         validateStatus(workItemNew);
         return workItemRepository.save(new WorkItem(workItem.getId(), workItemNew.getDescription(),
-                WorkItemStatus.valueOf(workItemNew.getWorkItemStatus()),
-                workItem.getHelpers()));
+                WorkItemStatus.valueOf(workItemNew.getWorkItemStatus()), workItem.getHelpers()));
     }
 
     public void deleteWorkItem(Long workItemId) {
