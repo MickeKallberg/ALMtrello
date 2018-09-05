@@ -175,8 +175,7 @@ public final class Service {
                 WorkItemStatus.valueOf(workItemNew.getWorkItemStatus()),
                 workItem.getUser()));
     }
-
-    //hej
+    
     public WorkItem addHelperToWorkItem(Long workItemId, WorkItemDto workItemNew, Long userNumber) {
         WorkItem workItem = validateWorkItem(workItemId);
         if (userExists(userNumber)) {
